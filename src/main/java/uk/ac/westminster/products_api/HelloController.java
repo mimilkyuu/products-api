@@ -33,7 +33,4 @@ public class HelloController {
     @GetMapping("/goodbye")
     public String goodbye() { return "Goodbye from Spring Boot!"; }
 
-    @GetMapping("/info")
-    public String info() { return "The purpose of this application is to get familiar with using SpringBoot and uploading to GitHub"; }
-
 }
