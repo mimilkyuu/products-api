@@ -25,12 +25,15 @@ public class HelloController {
 
     @GetMapping("/status")
     public String status(){
-        return "API running -" + LocalDate.now().toString();
+        return "Today's date: " + LocalDate.now().toString();
     }
 
     // TODO (Activity 3): add your /goodbye endpoint here.
 
     @GetMapping("/goodbye")
     public String goodbye() { return "Goodbye from Spring Boot!"; }
+
+    @GetMapping("/info")
+    public String info() { return "The purpose of this application is to get familiar with using SpringBoot and uploading to GitHub"; }
 
 }
