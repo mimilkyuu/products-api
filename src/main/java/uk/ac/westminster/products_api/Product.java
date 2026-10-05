@@ -15,6 +15,9 @@ public class Product {
     public Long getID() {return id;}
 
     public String getName() {return name;}
+    /* name disappeared as Jackson looks for a public getx() method, name was skipped
+    In a project with 15 fields, if there are less than 15 outputs, there may be a missing getter
+     */
 
     public double getPrice() {return price;}
 
