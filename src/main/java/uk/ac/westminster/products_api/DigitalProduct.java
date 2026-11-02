@@ -19,5 +19,12 @@ public class DigitalProduct extends Product{
 
     public double getFileSizeMB() {return fileSizeMB;}
 
+    @Override
+    public String getSummary() {
+        return "Name: " + getName() + " | URL: " + downloadUrl;
+        // this is the subclass and name field is private, therefore
+        // to call the name you must use getName(), including override
+    }
+
 }
 
