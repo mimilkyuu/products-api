@@ -22,9 +22,11 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public Product addProduct(@RequestBody Product product) {
+    public Product addProduct(@RequestBody DigitalProduct product) {
         return productService.addProduct(product);
     }
+    // Parameter changed from @RequestBody Product -> DigitalProduct.
+    // As Jackson cannot build an abstract class from JSON, will cover in lecture 6,7.
 
     @DeleteMapping("/products/{id}")
     public void deleteProduct(@PathVariable Long id) {
