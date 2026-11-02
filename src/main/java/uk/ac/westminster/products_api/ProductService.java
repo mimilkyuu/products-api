@@ -50,4 +50,13 @@ public class ProductService {
                 .toList();
     }
 
+    public List<String> getAllSummaries() {
+        List<String> productSummaries = new ArrayList<>();
+
+        for (Product p : products) {
+            productSummaries.add(p.getSummary());
+        }
+        return productSummaries;
+    }
+
 }
