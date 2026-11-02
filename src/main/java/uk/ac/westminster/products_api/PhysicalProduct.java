@@ -4,10 +4,11 @@ package uk.ac.westminster.products_api;
 // One other class a shop system might have that would not pass this test would be: a ShoppingCart
 // As the shopping cart HAS products, it owns it, not inherits it.
 
-public class PhysicalProduct extends Product{
+public class PhysicalProduct extends Product implements Discountable {
 
     private double weightKg;
     private String dimensions;
+    private double discountPrice;
 
     public PhysicalProduct() {}
 
@@ -23,6 +24,16 @@ public class PhysicalProduct extends Product{
     public String getSummary() {
         return "Name: " + getName() + " | Weight: " + weightKg + "Kg" + " | Size: " + dimensions;
     }
+    @Override
+    public void applyDiscount(double rate) {
+        double cappedRate = Math.min(0.20, rate);
+        discountPrice = getPrice() * (1 - cappedRate);
+    }
+    @Override
+    public double getDiscountedPrice() {
+        return discountPrice;
+    }
+
 
     public double getWeightKg() {return weightKg;}
     public String getDimensions() {return dimensions;}
