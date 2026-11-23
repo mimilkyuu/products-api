@@ -15,12 +15,12 @@ public class ProductController {
 
     @GetMapping("/products")
     public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+        return productService.findAll();
     }
 
     @GetMapping("/products/{id}")
     public Product getProductById(@PathVariable Long id) {
-        return productService.getProductById(id).orElse(null);
+        return productService.getProductById(id);
     }
 
     @PostMapping("/products")
@@ -35,12 +35,12 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-    @GetMapping("/products/search")
-    public List<Product> search(@RequestParam String name) {
-        return productService.findByName(name);
-    }
+//    @GetMapping("/products/search")
+//    public List<Product> search(@RequestParam String name) {
+//        return productService.findByName(name);
+//    }
 
-    @GetMapping("/products/summaries")
-    public List<String> geAllSummaries() {return productService.getAllSummaries();}
+//    @GetMapping("/products/summaries")
+//    public List<String> geAllSummaries() {return productService.getAllSummaries();}
 }
 

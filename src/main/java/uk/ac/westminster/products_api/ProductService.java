@@ -1,6 +1,9 @@
 package uk.ac.westminster.products_api;
 
 import org.springframework.stereotype.Service;
+import uk.ac.westminster.products_api.exception.ProductNotFoundException;
+import uk.ac.westminster.products_api.repository.ProductRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,43 +11,37 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    public ProductService() {
+    private final ProductRepository repository;
 
-    }
-
-    public List<Product> getAllProducts() {
-        return products;
+    public ProductService(ProductRepository repository) {
+        this.repository = repository;
     }
 
     public Product addProduct(Product product) {
-        product.setId(nextId++);
-        products.add(product);
-        return product;
+        return repository.save(product);
     }
 
-    public Optional<Product> getProductById(Long id) {
-        return products.stream()
-                    .filter(p -> p.getId().equals(id))
-                    .findFirst();
+    public Product getProductById(Long id) {
+        return repository.findById(id)
+                .orElseThrow( ()-> new ProductNotFoundException(id));
     }
 
     public void deleteProduct(Long id) {
-        products.removeIf(p -> p.getId().equals(id));
+        repository.findById(id);
+        repository.delete(id);
     }
 
-    public List<Product> findByName(String name) {
-        return products.stream()
-                .filter(p -> p.getName().contains(name))
-                .toList();
+    public List<Product> findAll() {
+        return repository.findAll();
     }
 
-    public List<String> getAllSummaries() {
-        List<String> productSummaries = new ArrayList<>();
-
-        for (Product p : products) {
-            productSummaries.add(p.getSummary());
-        }
-        return productSummaries;
-    }
+//    public List<String> getAllSummaries() {
+//        List<String> productSummaries = new ArrayList<>();
+//
+//        for (Product p : products) {
+//            productSummaries.add(p.getSummary());
+//        }
+//        return productSummaries;
+//    }
 
 }
